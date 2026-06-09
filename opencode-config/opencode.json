@@ -1,0 +1,26 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "sonarqube": {
+      "type": "local",
+      "command": [
+        "docker", "run", "--init", "-i", "--rm", "--pull=always",
+        "-e", "SONARQUBE_URL",
+        "-e", "SONARQUBE_TOKEN",
+        "-e", "SONARQUBE_ORG",
+        "-e", "SONARQUBE_PROJECT_KEY",
+        "-e", "SONARQUBE_TOOLSETS",
+        "-v", "<ABSOLUTE_PATH_TO_AWS_CLI>:/app/mcp-workspace:rw",
+        "mcp/sonarqube"
+      ],
+      "environment": {
+        "SONARQUBE_URL": "https://sonarcloud.io",
+        "SONARQUBE_ORG": "<YourOrganizationKey>",
+        "SONARQUBE_PROJECT_KEY": "<YourProjectKey>",
+        "SONARQUBE_TOOLSETS": "cag,analysis,rules"
+      },
+      "enabled": true,
+      "timeout": 30000
+    }
+  }
+}
